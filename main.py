@@ -5,6 +5,7 @@ import logging
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 import paho.mqtt.client as mqtt
+from fastapi.staticfiles import StaticFiles
 
 # ============================================================
 # LOGGING
@@ -114,6 +115,12 @@ def get_powermeter():
 def get_dispenser():
     return latest_dispenser
 
+
+app.mount(
+    "/static",
+    StaticFiles(directory="static"),
+    name="static"
+)
 
 # ============================================================
 # FRONTEND HTML / UI (PRESSMON THEME)
